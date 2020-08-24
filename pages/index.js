@@ -1,6 +1,15 @@
 import Head from 'next/head'
 import Header from '../components/header'
 import Banner from '../components/banner'
+import { useRouter } from 'next/router';
+import useSWR from 'swr';
+
+
+const fetcher = async (...args) => {
+  const res = await fetch(...args);
+
+  return res.json();
+};
 
 export async function getStaticProps () {
   const categories = await Promise.resolve([
@@ -67,7 +76,18 @@ export async function getStaticProps () {
   return { props: { categories, products } }
 }
 
-export default function Home ({ categories, products }) {
+export default function Home () {
+  // const router = useRouter();
+  // const { name } = router.query;
+  const { data: products } = useSWR(`/api/products`, fetcher);
+  const { data: categories } = useSWR(`/api/categories`, fetcher);
+
+  console.log(categories, products)
+
+  if(!categories || !products) {
+    return <div>Loading...</div>
+  }
+
   return (
     <div className='grid gap-4'>
       <Header />
@@ -76,20 +96,20 @@ export default function Home ({ categories, products }) {
         <div className=''>
           <h2 className='mb-2 font-bold text-gray-800'>Categories</h2>
           <ul className='flex lg:flex-col flex-wrap'>
-            {categories.map((el, index) => (
+            {categories.data.map((el, index) => (
               <li key={index} className='mr-1 mb-1 font-medium'>
                 <a
                   className='text-gray-500 hover:text-gray-700 text-sm'
                   href='#'
                 >
-                  {el.desc}
+                  {el.description}
                 </a>
               </li>
             ))}
           </ul>
         </div>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 h-20 gap-4'>
-          {categories.map((el, index) => (
+          {products.data.map((el, index) => (
             <div key={index}>
               <div className='bg-gray-200 rounded-lg p-6 mb-2 flex center justify-center items-center'>
                 <img
@@ -100,7 +120,7 @@ export default function Home ({ categories, products }) {
               </div>
               <div className='flex justify-between items-center'>
                 <div>
-                  <p className='font-bold text-gray-800'>DISCO DURO</p>
+                  <p className='font-bold text-gray-800'>{el.name}</p>
                   <p className='font-bold text-black'>S/ 150.00</p>
                 </div>
                 <div>
