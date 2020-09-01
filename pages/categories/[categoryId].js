@@ -1,28 +1,30 @@
 import Head from 'next/head'
-import Header from '../components/header'
-import Banner from '../components/banner'
-import { useRouter } from 'next/router'
-import useSWR from 'swr'
-import LinkItem from '../components/Link'
-import NumberFormat from 'react-number-format'
+import Header from '../../components/header'
+import Banner from '../../components/banner'
+import { useRouter } from 'next/router';
+import useSWR from 'swr';
+import LinkItem from '../../components/Link'
+
 
 const fetcher = async (...args) => {
-  const res = await fetch(...args)
+  const res = await fetch(...args);
 
-  return res.json()
-}
+  return res.json();
+};
 
 function currencyFormat(num, prefix) {
   return prefix + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
 
-export default function Home () {
-  // const router = useRouter();
-  // const { name } = router.query;
-  const { data: products } = useSWR(`/api/products`, fetcher)
-  const { data: categories } = useSWR(`/api/categories`, fetcher)
 
-  if (!categories || !products) {
+export default function Products () {
+  const router = useRouter();
+  const { categoryId } = router.query;
+  console.log(categoryId)
+  const { data: products } = useSWR(`/api/categories/${categoryId}`, fetcher);
+  const { data: categories } = useSWR(`/api/categories`, fetcher);
+
+  if(!categories || !products) {
     return <div>Loading...</div>
   }
 
@@ -35,21 +37,16 @@ export default function Home () {
           <h2 className='mb-2 font-bold text-gray-800'>Categories</h2>
           <ul className='flex lg:flex-col flex-wrap'>
             {categories.data.map((el, index) => (
-              <LinkItem
-                href='/categories/[categoryId]'
-                as={`/categories/${el.key}`}
-                className='mr-1 mb-1 font-medium text-gray-500 hover:text-gray-700 text-sm'
-                key={index}
-              >
-                <li>
-                  <a
-                    className='text-gray-500 hover:text-gray-700 text-sm'
-                    href='#'
-                  >
-                    {el.description}
-                  </a>
-                </li>
-              </LinkItem>
+              <LinkItem href='/categories/[categoryId]' as={`/categories/${el.key}`} className='mr-1 mb-1 font-medium text-gray-500 hover:text-gray-700 text-sm'  key={index}>
+              <li>
+                <a
+                  className=''
+                  href='#'
+                >
+                  {el.description}
+                </a>
+              </li>
+            </LinkItem>
             ))}
           </ul>
         </div>
@@ -66,29 +63,14 @@ export default function Home () {
               <div className='flex justify-between items-center'>
                 <div>
                   <p className='font-bold text-gray-800'>{el.name}</p>
-                  <p className='font-bold text-black'>S/ 150.00</p>
                   <div>
-                    
-                        <span class='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
+                  <span class='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
                           {currencyFormat(+el.price_usd, '$')}
                         </span>
 
                         <span class='inline-block bg-gray-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 mr-2 mb-2'>
                           {currencyFormat(+el.price_pen, 'S/')}
                         </span>
-                      
-
-                    {/* <NumberFormat
-                      value={el.price_usd.toFixed(2)}
-                      displayType={'text'}
-                      fixedDecimalScale={true}
-                      prefix={'$'}
-                      renderText={value => (
-                        <span class='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
-                          {value}
-                        </span>
-                      )}
-                    /> */}
                   </div>
                 </div>
                 <div>
@@ -111,7 +93,8 @@ export default function Home () {
             </div>
           ))}
 
-          {products.data.length === 0 && <span>No hay items</span>}
+        {products.data.length === 0 && <span>No hay items</span> }
+
         </div>
       </div>
     </div>
