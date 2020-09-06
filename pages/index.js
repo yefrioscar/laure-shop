@@ -4,7 +4,6 @@ import Banner from '../components/banner'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import LinkItem from '../components/Link'
-import NumberFormat from 'react-number-format'
 
 const fetcher = async (...args) => {
   const res = await fetch(...args)
@@ -12,7 +11,7 @@ const fetcher = async (...args) => {
   return res.json()
 }
 
-function currencyFormat(num, prefix) {
+function currencyFormat (num, prefix) {
   return prefix + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
 
@@ -63,35 +62,19 @@ export default function Home () {
                   alt=''
                 />
               </div>
-              <div className='flex justify-between items-center'>
-                <div>
-                  <p className='font-bold text-gray-800'>{el.name}</p>
-                  <p className='font-bold text-black'>S/ 150.00</p>
+              <div className='flex flex-col justify-between space-y-2'>
+                <p className='font-bold text-gray-800'>{el.name}</p>
+                <div class="flex justify-between">
                   <div>
-                    
-                        <span class='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
-                          {currencyFormat(+el.price_usd, '$')}
-                        </span>
+                    <span class='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
+                      {currencyFormat(+el.price_usd, '$')}
+                    </span>
 
-                        <span class='inline-block bg-gray-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 mr-2 mb-2'>
-                          {currencyFormat(+el.price_pen, 'S/')}
-                        </span>
-                      
-
-                    {/* <NumberFormat
-                      value={el.price_usd.toFixed(2)}
-                      displayType={'text'}
-                      fixedDecimalScale={true}
-                      prefix={'$'}
-                      renderText={value => (
-                        <span class='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
-                          {value}
-                        </span>
-                      )}
-                    /> */}
+                    <span class='inline-block bg-gray-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 mr-2 mb-2'>
+                      {currencyFormat(+el.price_pen, 'S/')}
+                    </span>
                   </div>
-                </div>
-                <div>
+
                   <svg
                     width={24}
                     height={24}
