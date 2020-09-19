@@ -4,7 +4,7 @@ export default async (req, res) => {
 
 
     try {
-      const collection = await firebase.collection('categories').get();
+      const collection = await firebase.collection('categories').where('state', '==', 'active').get();
       let data = collection.docs.map(doc => doc.data())
 
       res.statusCode = 200
