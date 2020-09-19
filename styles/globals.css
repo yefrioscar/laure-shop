@@ -1,25 +1,9 @@
-/* html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-} */
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  @apply p-6 max-w-screen-xl m-auto;
+  @apply p-6;
+  @apply max-w-screen-xl;
+  @apply m-auto;
 }
