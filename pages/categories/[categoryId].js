@@ -1,9 +1,7 @@
-import Head from 'next/head'
 import Header from '../../components/header'
 import Banner from '../../components/banner'
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
-import LinkItem from '../../components/Link'
 import ProductList from '../../components/ProductList';
 
 

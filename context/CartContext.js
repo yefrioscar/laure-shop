@@ -1,16 +1,16 @@
-import { useState } from "react";
+// import { useState } from "react";
 
 
-const cartContext = useContext(contextValue)
+// const cartContext = useContext(contextValue)
 
 
-const AppContextProvider = ({ children }) => {
-  const [bag, setBag] = useState([])
+// const AppContextProvider = ({ children }) => {
+//   const [bag, setBag] = useState([])
 
   
 
 
-  return (  );
-}
+//   return (  );
+// }
  
-export default AppContextProvider;
+// export default AppContextProvider;
