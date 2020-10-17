@@ -5,7 +5,10 @@ export default async (req, res) => {
 
     try {
       const collection = await firebase.collection('products').get();
-      let data = collection.docs.map(doc => doc.data())
+      let data = collection.docs.map(doc => {
+        const data = doc.data()
+        return { id: doc.id, ...data };
+      })
 
       res.statusCode = 200
       res.json({ data })
