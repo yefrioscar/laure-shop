@@ -36,11 +36,11 @@ const ProductList = ({ categories, products }) => {
         </ul>
       </div>
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 h-20 gap-4'>
-        {products.data.map((el, index) => (
+        {products.map((el, index) => (
           <ProductCard {...el} key={index} />
         ))}
 
-        {products.data.length === 0 && <span>No hay items</span>}
+        {products.length === 0 && <span>No hay items</span>}
       </div>
     </div>
   )
