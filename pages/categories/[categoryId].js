@@ -2,9 +2,9 @@ import Header from '../../components/header'
 import Banner from '../../components/banner'
 import { useRouter } from 'next/router'
 import ProductList from '../../components/ProductList'
-import { useQuery } from 'apollo/client'
 import withApollo from '../../lib/apollo'
 import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks'
 
 
 const QUERY_PRODUCTS = gql`
