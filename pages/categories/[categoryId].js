@@ -58,4 +58,4 @@ const CategoryDetails = () => {
   )
 }
 
-export default withApollo({ ssr: true })(CategoryDetails)
+export default withApollo(CategoryDetails)
