@@ -1,11 +1,15 @@
+import AppContext from '../context/AppContext'
 import { BagProvider } from '../context/CartContext'
 import '../styles/index.css'
+import AuthProvider from '../context/AuthProvider';
 
 function MyApp ({ Component, pageProps }) {
   return (
-    <BagProvider>
-      <Component {...pageProps} />
-    </BagProvider>
+    <AuthProvider>
+      <BagProvider>
+        <Component {...pageProps} />
+      </BagProvider>
+    </AuthProvider>
   )
 }
 

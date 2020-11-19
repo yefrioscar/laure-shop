@@ -19,16 +19,16 @@ const ProductList = ({ categories, products }) => {
                 </a>
               </li>
             </LinkItem>
-          {categories.data.map((el, index) => (
+          {categories.map((el, index) => (
             <LinkItem
               href='/categories/[categoryId]'
-              as={`/categories/${el.key}`}
+              as={`/categories/${el.id}`}
               className='mr-1 mb-1 font-medium text-gray-500 hover:text-gray-700 text-sm'
               key={index}
             >
               <li>
                 <a className='' href='#'>
-                  {el.description}
+                  {el.name}
                 </a>
               </li>
             </LinkItem>
