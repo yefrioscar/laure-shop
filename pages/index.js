@@ -18,6 +18,7 @@ const QUERY_PRODUCTS = gql`
     products {
       id
       name
+      price_pen
       price_usd
     }
   }
