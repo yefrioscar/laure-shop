@@ -1,29 +1,48 @@
 import Header from '../../components/header'
 import Banner from '../../components/banner'
-import { useRouter } from 'next/router';
-import useSWR from 'swr';
-import ProductList from '../../components/ProductList';
+import { useRouter } from 'next/router'
+import ProductList from '../../components/ProductList'
+import { useQuery } from 'apollo/client'
+import withApollo from '../../lib/apollo'
+import gql from 'graphql-tag';
 
 
-const fetcher = async (...args) => {
-  const res = await fetch(...args);
+const QUERY_PRODUCTS = gql`
+  query Products($categoryId: String!) {
+    products(where: { categories: $categoryId }) {
+      name
+      brand
+      price_pen
+      price_usd
+      categories {
+        name
+      }
+    }
+  }
+`
 
-  return res.json();
-};
+const QUERY_CATEGORIES = gql`
+  {
+    categories(where: { state: "active" }) {
+      id
+      name
+      state
+    }
+  }
+`
 
-function currencyFormat(num, prefix) {
-  return prefix + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-}
-
-
-export default function Products () {
-  const router = useRouter();
-  const { categoryId } = router.query;
+const CategoryDetails = () => {
+  const router = useRouter()
+  const { categoryId } = router.query
   console.log(categoryId)
-  const { data: products } = useSWR(`/api/categories/${categoryId}`, fetcher);
-  const { data: categories } = useSWR(`/api/categories`, fetcher);
+  const { loading: loadingProduct, error: errorProducts, data: dataProducts } = useQuery(QUERY_PRODUCTS, { variables: { categoryId } })
+  const {
+    loading: loadingCategories,
+    error: errorCategories,
+    data: dataCategories
+  } = useQuery(QUERY_CATEGORIES)
 
-  if(!categories || !products) {
+  if (loadingProduct || loadingCategories) {
     return <div>Loading...</div>
   }
 
@@ -31,7 +50,12 @@ export default function Products () {
     <div className='grid gap-4'>
       <Header />
       <Banner />
-      <ProductList products={products} categories={categories} />
+      <ProductList
+        products={dataProducts.products}
+        categories={dataCategories.categories}
+      />
     </div>
   )
 }
+
+export default withApollo({ ssr: true })(CategoryDetails)
