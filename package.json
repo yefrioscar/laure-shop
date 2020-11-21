@@ -17,6 +17,7 @@
     "apollo-link-token-refresh": "^0.2.7",
     "axios": "^0.21.0",
     "formik": "^2.2.5",
+    "framer-motion": "^2.9.4",
     "graphql": "^15.4.0",
     "graphql-tag": "^2.11.0",
     "isomorphic-fetch": "^3.0.0",

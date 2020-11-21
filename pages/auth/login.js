@@ -121,6 +121,15 @@ const Login = () => {
                     Iniciar sesion
                   </button>
                 </div>
+                <div className='flex items-center justify-center'>
+                      <div className='text-sm leading-5'>
+                        <Link href='/auth/login'>
+                          <a className='font-medium text-laure-600 hover:text-laure-500 focus:outline-none focus:underline transition ease-in-out duration-150'>
+                            Iniciar sesion
+                          </a>
+                        </Link>
+                      </div>
+                    </div>
               </form>
             )}
           </Formik>
