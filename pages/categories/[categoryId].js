@@ -23,10 +23,10 @@ const QUERY_PRODUCTS = gql`
 
 const QUERY_CATEGORIES = gql`
   {
-    categories(where: { state: "active" }) {
+    categories(where: { state: "true" }) {
       id
       name
-      state
+      
     }
   }
 `
