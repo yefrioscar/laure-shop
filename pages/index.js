@@ -10,6 +10,7 @@ import { MainLayout } from '../components/Layout'
 const QUERY_PRODUCTS = gql`
   {
     products {
+      id,
       name
       brand
       price_pen
@@ -42,7 +43,6 @@ const Home = () => {
     error: errorCategories,
     data: dataCategories
   } = useQuery(QUERY_CATEGORIES)
-  console.log(errorCategories, errorProducts)
 
   if (loadingProduct || loadingCategories) {
     return <div>Loading...</div>

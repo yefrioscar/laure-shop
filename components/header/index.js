@@ -24,12 +24,12 @@ const Header = ({ title, user }) => {
         </Link>
       </li>
 
-      <h1>{title}</h1>
+      <h1 className="font-bold text-xl">{title}</h1>
 
       <div className='flex space-x-4'>
         <div className='relative flex justify-center items-center'>
-          <Link href='/checkout'>
-            <>
+          <Link href='/cart'>
+            <div>
               <svg
                 className='h-6 w-6 fill-current text-gray-600 hover:text-gray-500 cursor-pointer transition duration-300 ease-in-out'
                 viewBox='0 0 24 24'
@@ -43,10 +43,10 @@ const Header = ({ title, user }) => {
                 <circle cx={20} cy={21} r={1} />
                 <path d='M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6' />
               </svg>
-              {/* <span className='inline-block bg-laure-300 rounded-full px-1 font-semibold text-sm text-laure-500 absolute right-0 top-0 transform translate-x-1/2 -translate-y-1/2'>
+              <span className='inline-block bg-laure-300 rounded-full px-1 font-semibold text-sm text-laure-500 absolute right-0 top-0 transform translate-x-1/2 -translate-y-1/2'>
                 {list.length}
-              </span> */}
-            </>
+              </span>
+            </div>
           </Link>
         </div>
 

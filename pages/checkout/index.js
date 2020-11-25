@@ -23,8 +23,7 @@ export default function Checkout () {
   }
 
   return (
-    <MainLayout>
-      <Header title='Checkout' />
+    <MainLayout title="Checkout">
       <div className='grid grid-cols-2 gap-4'>
         <div className='space-y-4'>
           <h2 className='text-2xl font-bold text-gray-700'>Datos requeridos</h2>

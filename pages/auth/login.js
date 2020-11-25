@@ -49,7 +49,7 @@ const Login = () => {
 
   return (
     <MainLayout title='Login' publicPage='public'>
-      <div className='flex items-center justify-center bg-gray-50'>
+      <div className='flex items-center justify-center bg-gray-50 pt-20'>
         <div className='max-w-md w-80 space-y-4'>
           <div className='flex items-center flex-col'>
             <h2 className='mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900'>
@@ -123,9 +123,9 @@ const Login = () => {
                 </div>
                 <div className='flex items-center justify-center'>
                       <div className='text-sm leading-5'>
-                        <Link href='/auth/login'>
+                        <Link href='/auth/register'>
                           <a className='font-medium text-laure-600 hover:text-laure-500 focus:outline-none focus:underline transition ease-in-out duration-150'>
-                            Iniciar sesion
+                            Registrarse
                           </a>
                         </Link>
                       </div>

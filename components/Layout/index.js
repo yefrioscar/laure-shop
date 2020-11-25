@@ -4,11 +4,10 @@ import Head from 'next/head'
 import { useAuth } from '../../context/AuthProvider'
 import { useRouter } from 'next/router'
 
-const MainLayout = ({ children, title, publicPage }) => {
+const MainLayout = ({ children, title, titleHeader, publicPage }) => {
   const { authState, signOut } = useAuth()
   const router = useRouter()
 
-  console.log(authState)
   if (authState.isAuthenticated && publicPage) {
     router.push('/')
   }
@@ -24,7 +23,7 @@ const MainLayout = ({ children, title, publicPage }) => {
         <title>{title}</title>
       </Head>
       <div className='grid gap-4'>
-        <Header user={authState.user} />
+        <Header user={authState.user} title={titleHeader} />
         {children}
       </div>
     </>
